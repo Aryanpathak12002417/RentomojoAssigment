@@ -21,8 +21,14 @@ router.post('/likeComment',(req,res)=>{
 
 
 
-router.post('/pagination',(req,res)=>{
-    
+router.post('/loadComment',(req,res)=>{
+    let {page}=req.query
+    db.find({}).limit(10,page-1).then((data)=>{
+        res.json({"data":data})
+    }).catch(err=>{
+        console.log(err)
+        res.json({"message":"failed to load comment"})
+    })
 })
 
 
